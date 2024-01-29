@@ -1,5 +1,4 @@
 use OO::Monitors;
-no precompilation;
 
 monitor Test::IO::Socket::Async {
     role Connection {
@@ -134,3 +133,36 @@ monitor Test::IO::Socket::Async {
         $p
     }
 }
+
+=begin pod
+
+=head1 NAME
+
+Test::IO::Socket::Async - A test double for IO::Socket::Async
+
+=head1 SYNOPSIS
+
+=begin code :lang<raku>
+
+use Test::IO::Socket::Async;
+
+=end code
+
+=head1 DESCRIPTION
+
+Test::IO::Socket::Async is provides the same API as C<IO::Socket::Async>
+but for testing.
+
+=head1 AUTHOR
+
+Jonathan Worthington
+
+=head1 COPYRIGHT AND LICENSE
+
+Copyright 2016 - 2024 Jonathan Worthington
+
+Copyright 2024 Raku Community
+
+This library is free software; you can redistribute it and/or modify it under the Artistic License 2.0.
+
+=end pod
