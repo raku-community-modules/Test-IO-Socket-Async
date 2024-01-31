@@ -151,7 +151,9 @@ use Test::IO::Socket::Async;
 =head1 DESCRIPTION
 
 Test::IO::Socket::Async is provides the same API as C<IO::Socket::Async>
-but for testing.
+but for testing.  See the
+L<associated blog post|https://6guts.wordpress.com/2016/01/06/not-guts-but-6-part-3/>
+for more information.
 
 =head1 AUTHOR
 
