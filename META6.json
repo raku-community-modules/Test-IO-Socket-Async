@@ -16,7 +16,7 @@
   "repo-type": "git",
   "resources": [
   ],
-  "source-url": "git://github.com/raku-community-modules/Test-IO-Socket-Async.git",
+  "source-url": "https://github.com/raku-community-modules/Test-IO-Socket-Async.git",
   "tags": [
   ],
   "test-depends": [

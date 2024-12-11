@@ -1,6 +1,9 @@
 use Test;
+
 use Test::IO::Socket::Async;
 
 plan 1;
 
 pass "loaded ok";
+
+# vim: expandtab shiftwidth=4
