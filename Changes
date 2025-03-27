@@ -1,6 +1,8 @@
 Revision history for Test-IO-Socket-Async
 
 {{$NEXT}}
+
+0.3  2025-03-27T19:03:41+01:00
     - Replace dependency on OO::Monitors by Method::Protected, as
       the latter is not dependent on experimental macros
     - Update copyright year    
