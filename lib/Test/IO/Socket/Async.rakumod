@@ -1,6 +1,6 @@
-use OO::Monitors;
+use Method::Protected:ver<0.0.4+>:auth<zef:lizmat>;
 
-monitor Test::IO::Socket::Async {
+class Test::IO::Socket::Async {
     role Connection {
         has @!sent;
         has @!waiting-sent-vows;
@@ -49,22 +49,22 @@ monitor Test::IO::Socket::Async {
         }
     }
 
-    monitor ClientConnection does Connection {
+    class ClientConnection does Connection {
         has $.host;
         has $.port;
         has $.connection-promise = Promise.new;
         has $!connection-vow = $!connection-promise.vow;
 
-        method accept-connection() {
+        method accept-connection() is protected {
             $!connection-vow.keep(self);
         }
 
-        method deny-connection($exception = "Connection refused") {
+        method deny-connection($exception = "Connection refused") is protected {
             $!connection-vow.break($exception);
         }
     }
 
-    monitor ServerConnection does Connection {
+    class ServerConnection does Connection {
     }
 
     class Listener {
@@ -89,7 +89,7 @@ monitor Test::IO::Socket::Async {
     has @!waiting-listens;
     has @!waiting-start-listening-vows;
 
-    method connect(Str() $host, Int() $port) {
+    method connect(Str() $host, Int() $port) is protected {
         my $conn = ClientConnection.new(:$host, :$port);
         with @!waiting-connection-made-vows.shift {
             .keep($conn);
@@ -100,7 +100,7 @@ monitor Test::IO::Socket::Async {
         $conn.connection-promise
     }
 
-    method connection-made() {
+    method connection-made() is protected {
         my $p = Promise.new;
         with @!waiting-connects.shift {
             $p.keep($_);
@@ -111,7 +111,7 @@ monitor Test::IO::Socket::Async {
         $p
     }
 
-    method listen(Str() $host, Int() $port) {
+    method listen(Str() $host, Int() $port) is protected {
         my $listener = Listener.new(:$host, :$port);
         with @!waiting-start-listening-vows.shift {
             .keep($listener);
@@ -122,7 +122,7 @@ monitor Test::IO::Socket::Async {
         $listener.connection-supply
     }
 
-    method start-listening() {
+    method start-listening() is protected {
         my $p = Promise.new;
         with @!waiting-listens.shift {
             $p.keep($_);
@@ -133,40 +133,5 @@ monitor Test::IO::Socket::Async {
         $p
     }
 }
-
-=begin pod
-
-=head1 NAME
-
-Test::IO::Socket::Async - A test double for IO::Socket::Async
-
-=head1 SYNOPSIS
-
-=begin code :lang<raku>
-
-use Test::IO::Socket::Async;
-
-=end code
-
-=head1 DESCRIPTION
-
-Test::IO::Socket::Async is provides the same API as C<IO::Socket::Async>
-but for testing.  See the
-L<associated blog post|https://6guts.wordpress.com/2016/01/06/not-guts-but-6-part-3/>
-for more information.
-
-=head1 AUTHOR
-
-Jonathan Worthington
-
-=head1 COPYRIGHT AND LICENSE
-
-Copyright 2016 - 2017 Jonathan Worthington
-
-Copyright 2024 Raku Community
-
-This library is free software; you can redistribute it and/or modify it under the Artistic License 2.0.
-
-=end pod
 
 # vim: expandtab shiftwidth=4

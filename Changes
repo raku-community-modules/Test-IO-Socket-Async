@@ -1,6 +1,9 @@
 Revision history for Test-IO-Socket-Async
 
 {{$NEXT}}
+    - Replace dependency on OO::Monitors by Method::Protected, as
+      the latter is not dependent on experimental macros
+    - Update copyright year    
 
 0.2  2024-12-11T20:18:06+01:00
     - Initial version in the zef ecosystem

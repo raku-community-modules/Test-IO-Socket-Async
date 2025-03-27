@@ -4,7 +4,7 @@
   "build-depends": [
   ],
   "depends": [
-    "OO::Monitors"
+    "Method::Protected:ver<0.0.4+>:auth<zef:lizmat>"
   ],
   "description": "A test double for IO::Socket::Async",
   "license": "Artistic-2.0",
